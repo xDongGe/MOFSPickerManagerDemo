@@ -94,7 +94,7 @@
 
 #pragma mark - Action
 
-- (void)showMOFSPickerViewWithDataArray:(NSArray<NSString *> *)array commitBlock:(void(^)(NSString *string))commitBlock cancelBlock:(void(^)(void))cancelBlock {
+- (void)showMOFSPickerViewWithDataArray:(NSArray<NSString *> *)array commitBlock:(void(^)(NSString *string,NSInteger row))commitBlock cancelBlock:(void(^)(void))cancelBlock {
     self.keyMapper = nil;
     self.dataArr = [NSMutableArray arrayWithArray:array];
     [self reloadAllComponents];
@@ -103,7 +103,7 @@
     if (self.needTag)
     {
         if ([self.recordDic.allKeys containsObject:tagStr]) {
-            self.selectedRow = [self.recordDic[tagStr] integerValue];
+            //self.selectedRow = [self.recordDic[tagStr] integerValue];
         } 
     }
     [self selectRow:self.selectedRow inComponent:0 animated:NO];
@@ -123,7 +123,7 @@
         if (commitBlock) {
             NSString *rowStr = [NSString stringWithFormat:@"%ld",(long)weakSelf.selectedRow];
             [weakSelf.recordDic setValue:rowStr forKey:tagStr];
-            commitBlock(weakSelf.dataArr[weakSelf.selectedRow]);
+            commitBlock(weakSelf.dataArr[weakSelf.selectedRow],weakSelf.selectedRow);
         }
     };
 }
@@ -237,7 +237,7 @@
     return self.dataArr[row];
 }
 
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+/*- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     UILabel* pickerLabel = (UILabel*)view;
     if (!pickerLabel){
         pickerLabel = [[UILabel alloc] init];;
@@ -251,10 +251,23 @@
     pickerLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:_attributes];
     
     return pickerLabel;
-}
+}*/
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     self.selectedRow = row;
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    
+    UILabel* pickerLabel = (UILabel*)view;
+    if (!pickerLabel){
+        pickerLabel = [[UILabel alloc] init];
+        [pickerLabel setTextAlignment:NSTextAlignmentCenter];
+        pickerLabel.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
+        [UIColor colorWithRed:64/255.0 green:64/255.0 blue:64/255.0 alpha:1/1.0];
+    }
+    pickerLabel.text=[self pickerView:pickerView titleForRow:row forComponent:component];
+    return pickerLabel;
 }
 
 

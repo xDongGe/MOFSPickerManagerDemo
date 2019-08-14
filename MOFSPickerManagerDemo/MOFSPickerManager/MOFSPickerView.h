@@ -19,7 +19,7 @@
 
 @property (nonatomic, strong) NSDictionary<NSAttributedStringKey, id> *attributes;
 
-- (void)showMOFSPickerViewWithDataArray:(NSArray<NSString *> *)array commitBlock:(void(^)(NSString *string))commitBlock cancelBlock:(void(^)(void))cancelBlock;
+- (void)showMOFSPickerViewWithDataArray:(NSArray<NSString *> *)array commitBlock:(void(^)(NSString *string,NSInteger row))commitBlock cancelBlock:(void(^)(void))cancelBlock;
 
 - (void)showMOFSPickerViewWithCustomDataArray:(NSArray *)array keyMapper:(NSString *)keyMapper commitBlock:(void(^)(id model))commitBlock cancelBlock:(void(^)(void))cancelBlock;
 

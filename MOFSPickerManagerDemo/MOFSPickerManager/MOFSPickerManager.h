@@ -14,7 +14,7 @@
 typedef void (^DatePickerCommitBlock)(NSDate * _Nonnull date);
 typedef void (^DatePickerCancelBlock)(void);
 
-typedef void (^PickerViewCommitBlock)(NSString * _Nonnull string);
+typedef void (^PickerViewCommitBlock)(NSString * _Nonnull string,NSInteger row);
 typedef void (^PickerViewCustomCommitBlock)(id _Nullable model);
 typedef void (^PickerViewCancelBlock)(void);
 

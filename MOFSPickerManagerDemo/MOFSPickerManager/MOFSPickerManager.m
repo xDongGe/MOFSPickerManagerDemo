@@ -149,9 +149,9 @@
     self.pickView.toolBar.titleBarTitle = title;
     self.pickView.toolBar.cancelBarTitle = cancelTitle;
     self.pickView.toolBar.commitBarTitle = commitTitle;
-    [self.pickView showMOFSPickerViewWithDataArray:array commitBlock:^(NSString *string) {
+    [self.pickView showMOFSPickerViewWithDataArray:array commitBlock:^(NSString *string,NSInteger row) {
         if (commitBlock) {
-            commitBlock(string);
+            commitBlock(string,row);
         }
     } cancelBlock:^{
         if (cancelBlock) {
@@ -167,9 +167,9 @@
     self.pickView.toolBar.titleBarTitle = title;
     self.pickView.toolBar.cancelBarTitle = cancelTitle;
     self.pickView.toolBar.commitBarTitle = commitTitle;
-    [self.pickView showMOFSPickerViewWithDataArray:array commitBlock:^(NSString *string) {
+    [self.pickView showMOFSPickerViewWithDataArray:array commitBlock:^(NSString *string,NSInteger row) {
         if (commitBlock) {
-            commitBlock(string);
+            commitBlock(string,row);
         }
     } cancelBlock:^{
         if (cancelBlock) {
